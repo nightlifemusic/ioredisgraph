@@ -56,12 +56,14 @@ class RedisGraph extends Redis {
 
 function parseMetaInformation (array) {
   meta = {}
-  for (prop of array) {
-    let [name, value] = prop.split(': ')
-    if(value) {
-      value = value.trim()
-      name = camelCase(name)
-      meta[name] = value
+  if(Array.isArray(array)) {
+    for (prop of array) {
+      let [name, value] = prop.split(': ')
+      if(value) {
+        value = value.trim()
+        name = camelCase(name)
+        meta[name] = value
+      }
     }
   }
   return meta
